@@ -92,20 +92,25 @@ namespace AutoBattle
                 //populates the character variables and targets
                 EnemyCharacter.Target = PlayerCharacter;
                 PlayerCharacter.Target = EnemyCharacter;
-                AllPlayers.Add(PlayerCharacter);
-                AllPlayers.Add(EnemyCharacter);
+                //Randomize which character starts first
+                if (currentTurn == 0)
+                {
+                    if (GetRandomInt(0, 2) == 0)
+                    {
+                        AllPlayers.Add(PlayerCharacter);
+                        AllPlayers.Add(EnemyCharacter);
+                    }
+                    else
+                    {
+                        AllPlayers.Add(EnemyCharacter);
+                        AllPlayers.Add(PlayerCharacter);
+                    }
+                }
                 AlocatePlayers();
                 StartTurn();
-
             }
 
             void StartTurn(){
-
-                if (currentTurn == 0)
-                {
-                    //AllPlayers.Sort();  
-                }
-
                 foreach(Character character in AllPlayers)
                 {
                     character.StartTurn(grid);
