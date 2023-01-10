@@ -110,12 +110,14 @@ namespace AutoBattle
                 StartTurn();
             }
 
-            void StartTurn(){
+            void StartTurn()
+            {
+                Console.WriteLine("Turn: {0}", currentTurn);
+
                 foreach(Character character in AllPlayers)
                 {
                     character.StartTurn(grid);
                 }
-
                 currentTurn++;
                 HandleTurn();
             }

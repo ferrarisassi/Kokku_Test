@@ -124,8 +124,9 @@ namespace AutoBattle
         public void Attack (Character target)
         {
             var rand = new Random();
-            target.TakeDamage(rand.Next(0, (int)BaseDamage));
-            Console.WriteLine($"Player {PlayerIndex} is attacking the player {Target.PlayerIndex} and did {BaseDamage} damage\n");
+            var damage = rand.Next(0, (int)BaseDamage);
+            target.TakeDamage(damage);
+            Console.WriteLine($"Player {PlayerIndex} is attacking the player {Target.PlayerIndex} and did {damage} damage\n");
         }
     }
 }
