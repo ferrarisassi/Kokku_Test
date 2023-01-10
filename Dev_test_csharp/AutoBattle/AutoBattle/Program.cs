@@ -11,7 +11,7 @@ namespace AutoBattle
     {
         static void Main(string[] args)
         {
-            Grid grid = new Grid(5, 5);
+            Grid grid = new Grid(GetRandomInt(5,11), GetRandomInt(5,11));
             CharacterClass playerCharacterClass;
             GridBox PlayerCurrentLocation;
             GridBox EnemyCurrentLocation;
