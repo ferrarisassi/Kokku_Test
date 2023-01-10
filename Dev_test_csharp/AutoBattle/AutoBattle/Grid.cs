@@ -15,14 +15,16 @@ namespace AutoBattle
         {
             xLenght = Lines;
             yLength = Columns;
-            Console.WriteLine("The battle field has been created\n");
+            //I'm showing the size of the battlefield before drawing it
+            Console.WriteLine("The battle field has been created, it size is {0} x {1}\n",Lines, Columns);
             for (int i = 0; i < Lines; i++)
             {
-                    grids.Add(newBox);
                 for(int j = 0; j < Columns; j++)
                 {
                     GridBox newBox = new GridBox(j, i, false, (Columns * i + j));
-                    Console.Write($"{newBox.Index}\n");
+                    //it isn't necessary to print the index for every box created
+                    //Console.Write($"{newBox.Index}\n");
+                    grids.Add(newBox);
                 }
             }
         }
