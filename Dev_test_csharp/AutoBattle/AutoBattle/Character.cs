@@ -78,27 +78,28 @@ namespace AutoBattle
                     return;
                 }
 
-                if (this.currentBox.yIndex > Target.currentBox.yIndex)
+                if (currentBox.yIndex > Target.currentBox.yIndex)
                 {
-                    battlefield.drawBattlefield(battlefield);
-                    this.currentBox.ocupied = false;
+                    
+                    currentBox.ocupied = false;
                     battlefield.grids[currentBox.Index] = currentBox;
-                    this.currentBox = (battlefield.grids.Find(x => x.Index == currentBox.Index - battlefield.xLenght));
-                    this.currentBox.ocupied = true;
+                    currentBox = (battlefield.grids.Find(x => x.Index == currentBox.Index - battlefield.xLenght));
+                    currentBox.ocupied = true;
                     battlefield.grids[currentBox.Index] = currentBox;
                     Console.WriteLine($"Player {PlayerIndex} walked up\n");
+                    battlefield.drawBattlefield(battlefield);
                     return;
                 }
-                else if(this.currentBox.yIndex < Target.currentBox.yIndex)
+                else if(currentBox.yIndex < Target.currentBox.yIndex)
                 {
-                    this.currentBox.ocupied = true;
-                    battlefield.grids[currentBox.Index] = this.currentBox;
-                    this.currentBox = (battlefield.grids.Find(x => x.Index == currentBox.Index + battlefield.xLenght));
-                    this.currentBox.ocupied = false;
+                    //Both boolean values here where switched
+                    currentBox.ocupied = false;
+                    battlefield.grids[currentBox.Index] = currentBox;
+                    currentBox = (battlefield.grids.Find(x => x.Index == currentBox.Index + battlefield.xLenght));
+                    currentBox.ocupied = true;
                     battlefield.grids[currentBox.Index] = currentBox;
                     Console.WriteLine($"Player {PlayerIndex} walked down\n");
                     battlefield.drawBattlefield(battlefield);
-
                     return;
                 }
             }
@@ -112,7 +113,8 @@ namespace AutoBattle
             bool up = (battlefield.grids.Find(x => x.Index == currentBox.Index + battlefield.xLenght).ocupied);
             bool down = (battlefield.grids.Find(x => x.Index == currentBox.Index - battlefield.xLenght).ocupied);
 
-            if (left & right & up & down) 
+            //The operator used was & and should be ||
+            if (left || right || up || down) 
             {
                 return true;
             }
