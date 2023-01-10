@@ -74,8 +74,8 @@ namespace AutoBattle
             void CreateEnemyCharacter()
             {
                 //randomly choose the enemy class and set up vital variables
-                var rand = new Random();
-                int randomInteger = rand.Next(1, 4);
+                //I'll use the function to take a random it already created
+                int randomInteger = GetRandomInt(1, 4);
                 CharacterClass enemyClass = (CharacterClass)randomInteger;
                 Console.WriteLine($"Enemy Class Choice: {enemyClass}");
                 EnemyCharacter = new Character(enemyClass);
@@ -181,7 +181,7 @@ namespace AutoBattle
                     RandomLocation.ocupied = true;
                     grid.grids[random] = RandomLocation;
                     EnemyCharacter.currentBox = grid.grids[random];
-                    grid.drawBattlefield(5 , 5);
+                    grid.drawBattlefield(grid.xLenght , grid.yLength);
                 }
                 else
                 {
