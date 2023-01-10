@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Victor Ferrari\\Desktop\\Projects\\Kokku_Test\\Dev_test_csharp\\AutoBattle\\AutoBattle\\AutoBattle.csproj": {}
+    "C:\\Users\\Victor Ferrari\\Desktop\\Projects\\Kokku_Test\\Kokku_Test\\Dev_test_csharp\\AutoBattle\\AutoBattle\\AutoBattle.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Victor Ferrari\\Desktop\\Projects\\Kokku_Test\\Dev_test_csharp\\AutoBattle\\AutoBattle\\AutoBattle.csproj": {
+    "C:\\Users\\Victor Ferrari\\Desktop\\Projects\\Kokku_Test\\Kokku_Test\\Dev_test_csharp\\AutoBattle\\AutoBattle\\AutoBattle.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Victor Ferrari\\Desktop\\Projects\\Kokku_Test\\Dev_test_csharp\\AutoBattle\\AutoBattle\\AutoBattle.csproj",
+        "projectUniqueName": "C:\\Users\\Victor Ferrari\\Desktop\\Projects\\Kokku_Test\\Kokku_Test\\Dev_test_csharp\\AutoBattle\\AutoBattle\\AutoBattle.csproj",
         "projectName": "AutoBattle",
-        "projectPath": "C:\\Users\\Victor Ferrari\\Desktop\\Projects\\Kokku_Test\\Dev_test_csharp\\AutoBattle\\AutoBattle\\AutoBattle.csproj",
+        "projectPath": "C:\\Users\\Victor Ferrari\\Desktop\\Projects\\Kokku_Test\\Kokku_Test\\Dev_test_csharp\\AutoBattle\\AutoBattle\\AutoBattle.csproj",
         "packagesPath": "C:\\Users\\Victor Ferrari\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Victor Ferrari\\Desktop\\Projects\\Kokku_Test\\Dev_test_csharp\\AutoBattle\\AutoBattle\\obj\\",
+        "outputPath": "C:\\Users\\Victor Ferrari\\Desktop\\Projects\\Kokku_Test\\Kokku_Test\\Dev_test_csharp\\AutoBattle\\AutoBattle\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Victor Ferrari\\AppData\\Roaming\\NuGet\\NuGet.Config",
