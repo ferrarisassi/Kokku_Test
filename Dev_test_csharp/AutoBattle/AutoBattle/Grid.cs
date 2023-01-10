@@ -30,13 +30,16 @@ namespace AutoBattle
         }
 
         // prints the matrix that indicates the tiles of the battlefield
-        public void drawBattlefield(int Lines, int Columns)
+        public void drawBattlefield(Grid grid)
         {
+            int Lines = grid.xLenght;
+            int Columns = grid.yLength;
             for (int i = 0; i < Lines; i++)
             {
                 for (int j = 0; j < Columns; j++)
                 {
-                    GridBox currentgrid = new GridBox();
+                    //Everytime the beattlefield is drawn, it is used only new gridbox instead of the game's grid
+                    GridBox currentgrid = grid.grids[i * Columns + j];
                     if (currentgrid.ocupied)
                     {
                         //if()

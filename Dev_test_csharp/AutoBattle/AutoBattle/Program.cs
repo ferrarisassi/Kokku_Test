@@ -13,8 +13,8 @@ namespace AutoBattle
         {
             Grid grid = new Grid(GetRandomInt(5,11), GetRandomInt(5,11));
             CharacterClass playerCharacterClass;
-            GridBox PlayerCurrentLocation;
-            GridBox EnemyCurrentLocation;
+            //GridBox PlayerCurrentLocation;
+            //GridBox EnemyCurrentLocation;
             Character PlayerCharacter;
             Character EnemyCharacter;
             List<Character> AllPlayers = new List<Character>();
@@ -158,9 +158,10 @@ namespace AutoBattle
                 int random = GetRandomInt(0, numberOfPossibleTiles);
                 GridBox RandomLocation = (grid.grids.ElementAt(random));
                 //I'll show the position as a cartesian point
-                Console.Write($"\nPlayer's start position is: ({random/grid.xLenght},{random%grid.xLenght})\n");
+                Console.Write($"\nPlayer's start position is: ({(random % grid.yLength) + 1},{(random / grid.yLength) + 1})\n");
                 if (!RandomLocation.ocupied)
                 {
+                    //Here was created an uneeded new variable
                     GridBox PlayerCurrentLocation = RandomLocation;
                     RandomLocation.ocupied = true;
                     grid.grids[random] = RandomLocation;
@@ -176,15 +177,15 @@ namespace AutoBattle
             {
                 int random = GetRandomInt(0, numberOfPossibleTiles);
                 GridBox RandomLocation = (grid.grids.ElementAt(random));
-                Console.Write($"Enemy's start position is: ({random / grid.xLenght},{random % grid.xLenght})\n\n");
+                Console.Write($"Enemy's start position is: ({(random % grid.yLength) + 1},{(random / grid.yLength) + 1})\n\n");
                 if (!RandomLocation.ocupied)
                 {
-                    EnemyCurrentLocation = RandomLocation;
+                    GridBox EnemyCurrentLocation = RandomLocation;
                     RandomLocation.ocupied = true;
                     grid.grids[random] = RandomLocation;
                     EnemyCharacter.currentBox = grid.grids[random];
                     Console.WriteLine("Initial Battlefield");
-                    grid.drawBattlefield(grid.xLenght , grid.yLength);
+                    grid.drawBattlefield(grid);
                 }
                 else
                 {

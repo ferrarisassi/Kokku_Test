@@ -61,7 +61,7 @@ namespace AutoBattle
                         currentBox.ocupied = true;
                         battlefield.grids[currentBox.Index] = currentBox;
                         Console.WriteLine($"Player {PlayerIndex} walked left\n");
-                        battlefield.drawBattlefield(battlefield.xLenght, battlefield.yLength);
+                        battlefield.drawBattlefield(battlefield);
 
                         return;
                     }
@@ -73,14 +73,14 @@ namespace AutoBattle
                     currentBox.ocupied = true;
                     battlefield.grids[currentBox.Index] = currentBox;
                     Console.WriteLine($"Player {PlayerIndex} walked right\n");
-                    battlefield.drawBattlefield(battlefield.xLenght, battlefield.yLength);
+                    battlefield.drawBattlefield(battlefield);
                     //This return was wrongly placed
                     return;
                 }
 
                 if (this.currentBox.yIndex > Target.currentBox.yIndex)
                 {
-                    battlefield.drawBattlefield(battlefield.xLenght, battlefield.yLength);
+                    battlefield.drawBattlefield(battlefield);
                     this.currentBox.ocupied = false;
                     battlefield.grids[currentBox.Index] = currentBox;
                     this.currentBox = (battlefield.grids.Find(x => x.Index == currentBox.Index - battlefield.xLenght));
@@ -97,7 +97,7 @@ namespace AutoBattle
                     this.currentBox.ocupied = false;
                     battlefield.grids[currentBox.Index] = currentBox;
                     Console.WriteLine($"Player {PlayerIndex} walked down\n");
-                    battlefield.drawBattlefield(battlefield.xLenght, battlefield.yLength);
+                    battlefield.drawBattlefield(battlefield);
 
                     return;
                 }
