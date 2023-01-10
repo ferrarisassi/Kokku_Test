@@ -74,14 +74,15 @@ namespace AutoBattle
             void CreateEnemyCharacter()
             {
                 //randomly choose the enemy class and set up vital variables
-                //I'll use the function to take a random it already created
+                //I'll use the function to take a random int that is already created
                 int randomInteger = GetRandomInt(1, 4);
                 CharacterClass enemyClass = (CharacterClass)randomInteger;
                 Console.WriteLine($"Enemy Class Choice: {enemyClass}");
                 EnemyCharacter = new Character(enemyClass);
                 EnemyCharacter.Health = 100;
-                PlayerCharacter.BaseDamage = 20;
-                PlayerCharacter.PlayerIndex = 1;
+                //Both lines where changing Player Characters parameters and it should be Player Character
+                EnemyCharacter.BaseDamage = 20;
+                EnemyCharacter.PlayerIndex = 1;
                 StartGame();
 
             }
@@ -149,14 +150,15 @@ namespace AutoBattle
             void AlocatePlayers()
             {
                 AlocatePlayerCharacter();
-
             }
 
             void AlocatePlayerCharacter()
             {
-                int random = 0;
+                //Made the position random based in how many tiles there are
+                int random = GetRandomInt(0, numberOfPossibleTiles);
                 GridBox RandomLocation = (grid.grids.ElementAt(random));
-                Console.Write($"{random}\n");
+                //I'll show the position as a cartesian point
+                Console.Write($"\nPlayer's start position is: ({random/grid.xLenght},{random%grid.xLenght})\n");
                 if (!RandomLocation.ocupied)
                 {
                     GridBox PlayerCurrentLocation = RandomLocation;
@@ -172,23 +174,22 @@ namespace AutoBattle
 
             void AlocateEnemyCharacter()
             {
-                int random = 24;
+                int random = GetRandomInt(0, numberOfPossibleTiles);
                 GridBox RandomLocation = (grid.grids.ElementAt(random));
-                Console.Write($"{random}\n");
+                Console.Write($"Enemy's start position is: ({random / grid.xLenght},{random % grid.xLenght})\n\n");
                 if (!RandomLocation.ocupied)
                 {
                     EnemyCurrentLocation = RandomLocation;
                     RandomLocation.ocupied = true;
                     grid.grids[random] = RandomLocation;
                     EnemyCharacter.currentBox = grid.grids[random];
+                    Console.WriteLine("Initial Battlefield");
                     grid.drawBattlefield(grid.xLenght , grid.yLength);
                 }
                 else
                 {
                     AlocateEnemyCharacter();
                 }
-
-                
             }
 
         }
