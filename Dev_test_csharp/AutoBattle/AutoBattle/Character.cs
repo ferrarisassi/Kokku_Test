@@ -57,6 +57,7 @@ namespace AutoBattle
                 {
                     Attack(Target);
                 }
+                //Turn the base damage back if the paladin has nullified it.
                 if (BaseDamage == 0)
                 {
                     BaseDamage = 20;
@@ -64,7 +65,7 @@ namespace AutoBattle
                 return;
             }
             else
-            {   // if there is no target close enough, calculates in wich direction this character should move to be closer to a possible target
+            {   //if there is no target close enough, calculates in wich direction this character should move to be closer to a possible target
                 if(this.currentBox.xIndex > Target.currentBox.xIndex)
                 {
                     if ((battlefield.grids.Exists(x => x.Index == currentBox.Index - 1)))
@@ -143,6 +144,8 @@ namespace AutoBattle
             Console.WriteLine($"Player {PlayerIndex} is attacking the player {Target.PlayerIndex} and did {damage} damage\n");
         }
 
+        //Each class has a Special Ability, which can be randomly used once per turn instead of attack.
+        //It has a chance 17% chance of happening per turn.
         void SpecialHability()
         {
             switch (charClass)
@@ -159,18 +162,16 @@ namespace AutoBattle
                 case CharacterClass.Warrior:
                     StrongAttack(Target);
                     break;
-                default:
-                    
-                    break;
             }
         }
 
+        //The Shield is the Paladin's ability and nullifies the target damage in the next turn.
         void Shield(Character target)
         {
             target.BaseDamage = 0;
             Console.WriteLine($"Player {PlayerIndex} used Shield. Player {Target.PlayerIndex} won't deal damage in the next attack\n");
         }
-
+        //The Strong Attack is the Warrior's ability and significantly damages the target.
         void StrongAttack(Character target)
         {
             var rand = new Random();
@@ -178,15 +179,22 @@ namespace AutoBattle
             target.TakeDamage(damage);
             Console.WriteLine($"Player {PlayerIndex} used Strong Attck in the player {Target.PlayerIndex} and did {damage} damage\n");
         }
-
+        //The Heal is the Cleric's ability, which heals the player.
         void Heal()
         {
             var rand = new Random();
-            var amount = rand.Next(0, 15);
-            Health += amount;
+            var amount = rand.Next(10, 26);
+            if (Health + amount > 100)
+            {
+                Health = 100;
+            }
+            else
+            {
+                Health += amount;
+            }
             Console.WriteLine($"Player {PlayerIndex} used Heal. Restored {amount} of heatlh\n");
         }
-
+        //The Barrage is the Archer's ability and hits the target multiple times with lower damage.
         void Barrage(Character target)
         {
             Console.WriteLine($"Player {PlayerIndex} used Barrage");
@@ -196,10 +204,11 @@ namespace AutoBattle
             for (int i = 0; i < times; i++)
             {
                 var rand2 = new Random();
-                var damage = rand2.Next(0, (int)BaseDamage/3);
+                var damage = rand2.Next(0, (int)BaseDamage/2+1);
                 target.TakeDamage(damage);
-                Console.WriteLine($"Player {PlayerIndex} is using Barrage in the player {Target.PlayerIndex} and did {damage} damage\n");
+                Console.WriteLine($"      used Barrage in the player {Target.PlayerIndex} and did {damage} damage");
             }
+            Console.Write("\n");
         }
     }
 }

@@ -6,15 +6,15 @@ namespace AutoBattle
 {
     public class Types
     {
-
-        public struct CharacterClassSpecific
+        //Comment what is not beign used now but can be used in the future
+        /*public struct CharacterClassSpecific
         {
             CharacterClass CharacterClass;
             float hpModifier;
             float ClassDamage;
             CharacterSkills[] skills;
 
-        }
+        }*/
 
         public struct GridBox
         {
@@ -33,12 +33,14 @@ namespace AutoBattle
 
         }
 
+        /*
         public struct CharacterSkills
         {
             string Name;
             float damage;
             float damageMultiplier;
         }
+        */
 
         public enum CharacterClass : uint
         {

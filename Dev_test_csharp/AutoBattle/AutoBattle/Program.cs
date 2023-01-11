@@ -11,13 +11,33 @@ namespace AutoBattle
     {
         static void Main()
         {
-            CharacterClass playerCharacterClass;
+            //Get the battlefield size from the player
+            Console.Write("Choose the width of the battlefield: ");
+            //test if the input in in correct format
+            int.TryParse(Console.ReadLine(), out int width);
+            while (width > 15 || width < 2)
+            {
+                Console.WriteLine("The sizes have to be between 3 and 20");
+                Console.Write("Choose the width of the battlefield: ");
+                int.TryParse(Console.ReadLine(), out width);
+            }
+            Console.Write("Choose the height of the battlefield: ");
+            int.TryParse(Console.ReadLine(), out int height);
+            while (height > 15 || height < 2)
+            {
+                Console.WriteLine("The sizes have to be between 3 and 20");
+                Console.Write("Choose the height of the battlefield: ");
+                int.TryParse(Console.ReadLine(), out height);
+            }
+            Grid grid = new Grid(width, height);
+            int numberOfPossibleTiles = grid.grids.Count;
+            Console.WriteLine("The Battlefield is set!\n\n");
+
             Character PlayerCharacter;
             Character EnemyCharacter;
             List<Character> AllPlayers = new List<Character>();
             int currentTurn = 0;
             Setup(); 
-
 
             void Setup()
             {
@@ -27,27 +47,7 @@ namespace AutoBattle
 
             void GetPlayerChoice()
             {
-                //Get the battlefield size from the player
-                Console.Write("Choose the width of the battlefield: ");
-                //test if the input in in correct format
-                int.TryParse(Console.ReadLine(), out int width);
-                while (width > 21 || width < 2)
-                {
-                    Console.WriteLine("The sizes have to be between 3 and 20");
-                    Console.Write("Choose the width of the battlefield: ");
-                    int.TryParse(Console.ReadLine(), out width);
-                }
-                Console.WriteLine("Choose the height of the battlefield: ");
-                int.TryParse(Console.ReadLine(), out int height);
-                while (height > 21 || height < 2)
-                {
-                    Console.WriteLine("The sizes have to be between 3 and 20");
-                    Console.Write("Choose the height of the battlefield: ");
-                    int.TryParse(Console.ReadLine(), out height);
-                }
-                Grid grid = new Grid(width, height);
-                int numberOfPossibleTiles = grid.grids.Count;
-                Console.WriteLine("The Battlefield is set!");
+                
                 //asks for the player to choose between for possible classes via console.
                 Console.WriteLine("Choose Between One of this Classes:\n");
                 Console.WriteLine("[1] Paladin, [2] Warrior, [3] Cleric, [4] Archer");
@@ -129,25 +129,30 @@ namespace AutoBattle
 
             void StartTurn()
             {
-
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("TURN: {0}", currentTurn);
                 if (PlayerCharacter.Health > 0)
                 {
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Player Health: {0}", PlayerCharacter.Health);
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("The Player is dead.");
                 }
                 if (EnemyCharacter.Health > 0)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Enemy Health: {0}", EnemyCharacter.Health);
                 }
                 else
                 {
-                    Console.WriteLine("The Player is dead.");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("The Enemy is dead.");
                 }
-
+                Console.ResetColor();
+                Console.Write("\n");
                 foreach (Character character in AllPlayers)
                 {
                     character.StartTurn(grid);
@@ -160,11 +165,13 @@ namespace AutoBattle
             {
                 if(PlayerCharacter.Health <= 0)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("YOU LOSE");
                     EndGame();
                 } 
                 else if (EnemyCharacter.Health <= 0)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("YOU WON");
                     EndGame();
                 } else
@@ -180,6 +187,7 @@ namespace AutoBattle
             //Winning or loosing the game ends here
             void EndGame()
             {
+                Console.ResetColor();
                 Console.WriteLine("Play Again?");
                 Console.WriteLine("[y] Yes, [n] No");
                 string choice = Console.ReadLine().ToLower();
