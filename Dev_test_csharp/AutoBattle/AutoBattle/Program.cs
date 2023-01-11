@@ -114,16 +114,24 @@ namespace AutoBattle
                 {
                     if (GetRandomInt(0, 2) == 0)
                     {
+                        Console.WriteLine("\nThe Player goes first\n");
                         AllPlayers.Add(PlayerCharacter);
                         AllPlayers.Add(EnemyCharacter);
                     }
                     else
                     {
+                        Console.WriteLine("\nThe Enemy goes first\n");
                         AllPlayers.Add(EnemyCharacter);
                         AllPlayers.Add(PlayerCharacter);
                     }
                 }
                 AlocatePlayers();
+
+                Console.Write(Environment.NewLine + Environment.NewLine);
+                Console.WriteLine("Click on any key to start the game...\n");
+                Console.Write(Environment.NewLine + Environment.NewLine);
+                ConsoleKeyInfo key = Console.ReadKey();
+
                 StartTurn();
             }
 
@@ -143,7 +151,7 @@ namespace AutoBattle
                 }
                 if (EnemyCharacter.Health > 0)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Enemy Health: {0}", EnemyCharacter.Health);
                 }
                 else
