@@ -11,7 +11,7 @@ namespace AutoBattle
     {
         static void Main()
         {
-            Grid grid = new Grid(GetRandomInt(5,6), GetRandomInt(5,6));
+            Grid grid = new Grid(GetRandomInt(5,11), GetRandomInt(5,11));
             CharacterClass playerCharacterClass;
             //GridBox PlayerCurrentLocation;
             //GridBox EnemyCurrentLocation;
@@ -160,22 +160,24 @@ namespace AutoBattle
                 }
             }
 
+            //Winning or loosing the game ends here
             void EndGame()
             {
                 Console.WriteLine("Play Again?");
                 Console.WriteLine("[y] Yes, [n] No");
-                string choice = Console.ReadLine();
+                string choice = Console.ReadLine().ToLower();
 
                 switch (choice)
                 {
                     case "y":
+                        Console.Clear();
                         Main();
                         break;
                     case "n":
                         Environment.Exit(0);
                         break;
                     default:
-                        HandleTurn();
+                        EndGame();
                         break;
                 }
             }

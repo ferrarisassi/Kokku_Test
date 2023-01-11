@@ -42,8 +42,9 @@ namespace AutoBattle
                     GridBox currentgrid = grid.grids[i * Columns + j];
                     if (currentgrid.ocupied)
                     {
-                        //if()
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write("[X]\t");
+                        Console.ResetColor();
                     }
                     else
                     {

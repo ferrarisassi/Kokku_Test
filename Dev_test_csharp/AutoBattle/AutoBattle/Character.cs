@@ -14,10 +14,11 @@ namespace AutoBattle
         public float DamageMultiplier { get; set; }
         public GridBox currentBox;
         public int PlayerIndex;
-        public Character Target { get; set; } 
+        public Character Target { get; set; }
+        public CharacterClass charClass;
         public Character(CharacterClass characterClass)
         {
-
+            charClass = characterClass;
         }
 
 
@@ -46,7 +47,20 @@ namespace AutoBattle
 
             if (CheckCloseTargets(battlefield)) 
             {
-                Attack(Target);
+                var rand = new Random();
+                var prob = rand.Next(0, 6);
+                if (prob == 0)
+                {
+                    SpecialHability();
+                }
+                else
+                {
+                    Attack(Target);
+                }
+                if (BaseDamage == 0)
+                {
+                    BaseDamage = 20;
+                }
                 return;
             }
             else
@@ -127,6 +141,65 @@ namespace AutoBattle
             var damage = rand.Next(0, (int)BaseDamage);
             target.TakeDamage(damage);
             Console.WriteLine($"Player {PlayerIndex} is attacking the player {Target.PlayerIndex} and did {damage} damage\n");
+        }
+
+        void SpecialHability()
+        {
+            switch (charClass)
+            {
+                case CharacterClass.Archer:
+                    Barrage(Target);
+                    break;
+                case CharacterClass.Cleric:
+                    Heal();
+                    break;
+                case CharacterClass.Paladin:
+                    Shield(Target);
+                    break;
+                case CharacterClass.Warrior:
+                    StrongAttack(Target);
+                    break;
+                default:
+                    
+                    break;
+            }
+        }
+
+        void Shield(Character target)
+        {
+            target.BaseDamage = 0;
+            Console.WriteLine($"Player {PlayerIndex} used Shield. Player {Target.PlayerIndex} won't deal damage in the next attack\n");
+        }
+
+        void StrongAttack(Character target)
+        {
+            var rand = new Random();
+            var damage = rand.Next((int)(BaseDamage/3), (int)BaseDamage) * 2;
+            target.TakeDamage(damage);
+            Console.WriteLine($"Player {PlayerIndex} used Strong Attck in the player {Target.PlayerIndex} and did {damage} damage\n");
+        }
+
+        void Heal()
+        {
+            var rand = new Random();
+            var amount = rand.Next(0, 15);
+            Health += amount;
+            Console.WriteLine($"Player {PlayerIndex} used Heal. Restored {amount} of heatlh\n");
+        }
+
+        void Barrage(Character target)
+        {
+            Console.WriteLine($"Player {PlayerIndex} used Barrage");
+            var rand1 = new Random();
+            var times = rand1.Next(2, 5);
+            Console.WriteLine($"Player {PlayerIndex} will attack {times} times");
+            for (int i = 0; i < times; i++)
+            {
+                var rand2 = new Random();
+                var damage = rand2.Next(0, (int)BaseDamage/3);
+                target.TakeDamage(damage);
+                Console.WriteLine($"Player {PlayerIndex} is using Barrage in the player {Target.PlayerIndex} and did {damage} damage\n");
+            }
         }
     }
 }
