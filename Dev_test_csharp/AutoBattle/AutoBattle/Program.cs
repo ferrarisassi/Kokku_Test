@@ -11,15 +11,11 @@ namespace AutoBattle
     {
         static void Main()
         {
-            Grid grid = new Grid(GetRandomInt(5,11), GetRandomInt(5,11));
             CharacterClass playerCharacterClass;
-            //GridBox PlayerCurrentLocation;
-            //GridBox EnemyCurrentLocation;
             Character PlayerCharacter;
             Character EnemyCharacter;
             List<Character> AllPlayers = new List<Character>();
             int currentTurn = 0;
-            int numberOfPossibleTiles = grid.grids.Count;
             Setup(); 
 
 
@@ -31,6 +27,27 @@ namespace AutoBattle
 
             void GetPlayerChoice()
             {
+                //Get the battlefield size from the player
+                Console.Write("Choose the width of the battlefield: ");
+                //test if the input in in correct format
+                int.TryParse(Console.ReadLine(), out int width);
+                while (width > 21 || width < 2)
+                {
+                    Console.WriteLine("The sizes have to be between 3 and 20");
+                    Console.Write("Choose the width of the battlefield: ");
+                    int.TryParse(Console.ReadLine(), out width);
+                }
+                Console.WriteLine("Choose the height of the battlefield: ");
+                int.TryParse(Console.ReadLine(), out int height);
+                while (height > 21 || height < 2)
+                {
+                    Console.WriteLine("The sizes have to be between 3 and 20");
+                    Console.Write("Choose the height of the battlefield: ");
+                    int.TryParse(Console.ReadLine(), out height);
+                }
+                Grid grid = new Grid(width, height);
+                int numberOfPossibleTiles = grid.grids.Count;
+                Console.WriteLine("The Battlefield is set!");
                 //asks for the player to choose between for possible classes via console.
                 Console.WriteLine("Choose Between One of this Classes:\n");
                 Console.WriteLine("[1] Paladin, [2] Warrior, [3] Cleric, [4] Archer");
