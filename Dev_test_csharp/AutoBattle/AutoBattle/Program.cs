@@ -9,7 +9,7 @@ namespace AutoBattle
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Grid grid = new Grid(GetRandomInt(5,6), GetRandomInt(5,6));
             CharacterClass playerCharacterClass;
@@ -112,13 +112,25 @@ namespace AutoBattle
 
             void StartTurn()
             {
-                if (currentTurn != 0)
+
+                Console.WriteLine("TURN: {0}", currentTurn);
+                if (PlayerCharacter.Health > 0)
                 {
-                    Console.WriteLine("\nNEXT TURN");
-                    Console.WriteLine("Turn: {0}", currentTurn);
                     Console.WriteLine("Player Health: {0}", PlayerCharacter.Health);
+                }
+                else
+                {
+                    Console.WriteLine("The Player is dead.");
+                }
+                if (EnemyCharacter.Health > 0)
+                {
                     Console.WriteLine("Enemy Health: {0}", EnemyCharacter.Health);
                 }
+                else
+                {
+                    Console.WriteLine("The Player is dead.");
+                }
+
                 foreach (Character character in AllPlayers)
                 {
                     character.StartTurn(grid);
@@ -129,26 +141,42 @@ namespace AutoBattle
 
             void HandleTurn()
             {
-                if(PlayerCharacter.Health == 0)
+                if(PlayerCharacter.Health <= 0)
                 {
-                    return;
-                } else if (EnemyCharacter.Health == 0)
+                    Console.WriteLine("YOU LOSE");
+                    EndGame();
+                } 
+                else if (EnemyCharacter.Health <= 0)
                 {
-                    Console.Write(Environment.NewLine + Environment.NewLine);
-
-                    // endgame?
-
-                    Console.Write(Environment.NewLine + Environment.NewLine);
-
-                    return;
+                    Console.WriteLine("YOU WON");
+                    EndGame();
                 } else
                 {
                     Console.Write(Environment.NewLine + Environment.NewLine);
                     Console.WriteLine("Click on any key to start the next turn...\n");
                     Console.Write(Environment.NewLine + Environment.NewLine);
-
                     ConsoleKeyInfo key = Console.ReadKey();
                     StartTurn();
+                }
+            }
+
+            void EndGame()
+            {
+                Console.WriteLine("Play Again?");
+                Console.WriteLine("[y] Yes, [n] No");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "y":
+                        Main();
+                        break;
+                    case "n":
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        HandleTurn();
+                        break;
                 }
             }
 
