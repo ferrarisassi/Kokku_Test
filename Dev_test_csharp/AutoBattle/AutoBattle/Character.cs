@@ -23,7 +23,7 @@ namespace AutoBattle
 
         public bool TakeDamage(float amount)
         {
-            if((Health -= BaseDamage) <= 0)
+            if((Health -= amount) <= 0)
             {
                 Die();
                 return true;

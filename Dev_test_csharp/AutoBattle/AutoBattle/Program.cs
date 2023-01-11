@@ -112,9 +112,14 @@ namespace AutoBattle
 
             void StartTurn()
             {
-                Console.WriteLine("Turn: {0}", currentTurn);
-
-                foreach(Character character in AllPlayers)
+                if (currentTurn != 0)
+                {
+                    Console.WriteLine("\nNEXT TURN");
+                    Console.WriteLine("Turn: {0}", currentTurn);
+                    Console.WriteLine("Player Health: {0}", PlayerCharacter.Health);
+                    Console.WriteLine("Enemy Health: {0}", EnemyCharacter.Health);
+                }
+                foreach (Character character in AllPlayers)
                 {
                     character.StartTurn(grid);
                 }
