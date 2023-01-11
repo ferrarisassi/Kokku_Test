@@ -229,8 +229,8 @@ namespace AutoBattle
                 if (!RandomLocation.ocupied)
                 {
                     //Here was created an uneeded new variable
-                    GridBox PlayerCurrentLocation = RandomLocation;
                     RandomLocation.ocupied = true;
+                    RandomLocation.who = Players.player;
                     grid.grids[random] = RandomLocation;
                     PlayerCharacter.currentBox = grid.grids[random];
                     AlocateEnemyCharacter();
@@ -247,8 +247,8 @@ namespace AutoBattle
                 Console.Write($"Enemy's start position is: ({(random % grid.yLength) + 1},{(random / grid.yLength) + 1})\n\n");
                 if (!RandomLocation.ocupied)
                 {
-                    GridBox EnemyCurrentLocation = RandomLocation;
                     RandomLocation.ocupied = true;
+                    RandomLocation.who = Players.enemy;
                     grid.grids[random] = RandomLocation;
                     EnemyCharacter.currentBox = grid.grids[random];
                     Console.WriteLine("Initial Battlefield");

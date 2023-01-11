@@ -21,7 +21,7 @@ namespace AutoBattle
             {
                 for(int j = 0; j < Columns; j++)
                 {
-                    GridBox newBox = new GridBox(j, i, false, (Columns * i + j));
+                    GridBox newBox = new GridBox(j, i, false, Players.none, (Columns * i + j));
                     //it isn't necessary to print the index for every box created
                     //Console.Write($"{newBox.Index}\n");
                     grids.Add(newBox);
@@ -42,8 +42,16 @@ namespace AutoBattle
                     GridBox currentgrid = grid.grids[i * Columns + j];
                     if (currentgrid.ocupied)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write("[X]\t");
+                        if (currentgrid.who == Players.player)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("[P]\t");
+                        }
+                        else if (currentgrid.who == Players.enemy)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write("[E]\t");
+                        }
                         Console.ResetColor();
                     }
                     else

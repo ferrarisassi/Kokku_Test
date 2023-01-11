@@ -22,15 +22,24 @@ namespace AutoBattle
             public int yIndex;
             public bool ocupied;
             public int Index;
+            public Players who;
 
-            public GridBox(int x, int y, bool ocupied, int index)
+            public GridBox(int x, int y, bool ocupied, Players who, int index)
             {
                 xIndex = x;
                 yIndex = y;
                 this.ocupied = ocupied;
+                this.who = who;
                 this.Index = index;
             }
 
+        }
+
+        public enum Players : uint
+        {
+            none = 0,
+            player = 1,
+            enemy = 2,
         }
 
         /*
